@@ -139,12 +139,32 @@
                         조직의 소속원 모두가 죽음에 대한 공포가 전혀 없으며, 붕괴 현상 및 몬스터 변이와 깊은 연관을 맺고 세계를 종말로 이끌려 합니다.
                     </p>
                 </div>
+
+                <!-- Ver Card -->
+                <div class="bg-slate-900/60 border border-purple-900/30 rounded-xl p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-purple-400 flex items-center gap-2">
+                        <i class="fa-solid fa-gem"></i> 베르
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        로어를 사용하기 위해 필요한 세계관 고유 에너지
+                    </p>
+                </div>
+
+                <!-- Lore Card -->
+                <div class="bg-slate-900/60 border border-purple-900/30 rounded-xl p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-purple-400 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> 로어
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        개인이 지니고 있는 특별한 능력
+                    </p>
+                </div>
             </div>
 
             <!-- Guilds & Factions -->
             <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
                 <h3 class="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-guilded"></i> 대륙 주요 길드
+                    <i class="fa-solid fa-shield"></i> 대륙 주요 길드
                 </h3>
                 <div class="grid sm:grid-cols-3 gap-4">
                     <div class="p-4 bg-slate-950 border border-slate-800 rounded-lg space-y-2">
@@ -162,6 +182,7 @@
                 </div>
             </div>
         </section>
+
         <!-- 2. Characters Tab -->
         <section id="content-characters" class="tab-content hidden space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl">
@@ -201,30 +222,85 @@
             </div>
         </section>
 
-        <!-- 4. Geography Atlas Tab -->
+        <!-- 4. Geography Atlas Tab (지도 이미지 + 4대 지역 및 세부 설정 통합) -->
         <section id="content-atlas" class="tab-content hidden space-y-6">
-            <h2 class="text-2xl font-bold text-white mb-2">루테빌라 대륙 4대 지역</h2>
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-map text-blue-400"></i> 루테빌라 대륙 지도 및 지리 정보
+                    </h2>
+                    <p class="text-xs text-slate-400">대륙 전역의 지도와 4대 지역, 던전 생태계 정보입니다.</p>
+                </div>
+                <!-- Map Image Container -->
+                <div class="w-full bg-slate-950 rounded-xl overflow-hidden border border-slate-800 shadow-2xl">
+                    <img src="https://itimg.kr/2700/LGD/map.webp" alt="루테빌라 대륙 지도" class="w-full h-auto object-contain">
+                </div>
+            </div>
+
+            <!-- Regions Grid -->
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
-                    <h3 class="text-xl font-bold text-amber-400">아르카디아 (동부)</h3>
-                    <p class="text-sm text-slate-300">아르카디아 제국, 철혈산맥, 검은 숲, 라그나</p>
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-amber-400">아르카디아 (동부)</h3>
+                        <span class="text-xs bg-amber-950 text-amber-300 px-2.5 py-1 rounded">기후: 따뜻함</span>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <strong>세부 거점:</strong> 아르카디아 제국(수도: 아르젠), 철혈산맥(드워프·베르 광산), 검은 숲(변이체·던전), 라그나(고대 폐허)
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-emerald-400">엘드라 (남부)</h3>
+                        <span class="text-xs bg-emerald-950 text-emerald-300 px-2.5 py-1 rounded">기후: 공기 좋음</span>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <strong>세부 거점:</strong> 엘드리아(수인들이 사는 숲), 실바레아(세계수 트리탄스 중심의 엘프 도시), 태고림(깊은 숲으로 형성된 필드형 던전), 고요의 호수(베르 극소 지역)
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-cyan-400">카르디아 (서부)</h3>
+                        <span class="text-xs bg-cyan-950 text-cyan-300 px-2.5 py-1 rounded">기후: 서늘함</span>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <strong>세부 거점:</strong> 벨카(자유도시), 심연동굴(동굴형 던전), 카르멘(서부 무역도시), 바르베톨(항구)
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-blue-400">아스테리아 (북부)</h3>
+                        <span class="text-xs bg-blue-950 text-blue-300 px-2.5 py-1 rounded">기후: 추움</span>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <strong>세부 거점:</strong> 화이트가르드(북방 최대 도시), 빙결궁(고대 유적), 빙설지대(빙설 변이체 서식지)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Dungeon & Collapse Info Inside Atlas Tab -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <h3 class="text-xl font-bold text-indigo-400 flex items-center gap-2">
+                        <i class="fa-solid fa-dungeon"></i> 던전 (Dungeon)
+                    </h3>
+                    <p class="text-sm text-slate-300">
+                        변이체 서식 및 생태계 유지 구역
+                    </p>
                 </div>
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
-                    <h3 class="text-xl font-bold text-emerald-400">엘드라 (남부)</h3>
-                    <p class="text-sm text-slate-300">엘드리아, 실바레아(세계수 트리탄스), 태고림</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
-                    <h3 class="text-xl font-bold text-cyan-400">카르디아 (서부)</h3>
-                    <p class="text-sm text-slate-300">벨카, 심연동굴, 카르멘, 바르베톨</p>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
-                    <h3 class="text-xl font-bold text-blue-400">아스테리아 (북부)</h3>
-                    <p class="text-sm text-slate-300">화이트가르드, 빙결궁, 빙설지대, 벨로스</p>
+                    <h3 class="text-xl font-bold text-red-400 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> 붕괴 현상 특이사항
+                    </h3>
+                    <p class="text-sm text-slate-300">
+                        살아있는 모든 것을 안쪽으로 끌어당기며 재앙급 이상의 보스 몬스터가 출현한다. 언제나 전조 없이 발생하며, 하나의 생명체만 빨아들여도 즉시 사망 처리 및 대비 불가.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Threat & Ranks Tab -->
         <!-- 5. Threat & Ranks Tab -->
         <section id="content-ranks" class="tab-content hidden space-y-8">
             <!-- Threat Levels -->
@@ -579,7 +655,7 @@
                 appearance: "레몬색 장발+길쭉한 바보털+주황색 눈동자", body: "172cm,57kg", cup: "H컵", personality: "화끈+가식없음",
                 description: "카르디아 지역의 수호자.",
                 tmi: "돈과 술을 매우 좋아하고 노는 것을 좋아함.",
-                quotes: ["이봐~내가 좀 취하고 싶은데 술 좀 주면 안되나?"],
+                quotes: ["I봐~내가 좀 취하고 싶은데 술 좀 주면 안되나?"],
                 rank: "수호자급", lore: "금염(金炎):베르조차 태워버리는 황금빛 불꽃을 전개."
             },
             {
@@ -606,7 +682,7 @@
                 appearance: "검은색+붉은색 안쪽 머리+히메컷", body: "169cm,51kg", cup: "G컵", personality: "무감정+오만",
                 description: "종언의 사도의 교주.",
                 tmi: "붕괴에 휘말려 연인을 잃은 후 인류 혐오에 빠짐.",
-                quotes: ["단 한사람이라도 구원받지 못한 세상에 영원한 평화는 없다."],
+                quotes: ["단 한사람라도 구원받지 못한 세상에 영원한 평화는 없다."],
                 rank: "S+급", lore: "브레이크 핸드:베르로 정형된 수십~수백개의 손으로 닿는 것 파괴."
             }
         ];
