@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>루테빌라 대륙 (Lutevilla Continent) - 세계관 & 인물 도감</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+        }
+        .tab-btn.active {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border-color: #60a5fa;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        /* 16:9 Aspect Ratio Box */
+        .img-box-169 {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Top Header -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-shield-halved text-blue-500 text-3xl"></i>
+                <div>
+                    <h1 class="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-500">
+                        루테빌라 대륙 (LUTE VILLA)
+                    </h1>
+                    <p class="text-xs text-slate-400">대마신 봉인 300년 후 · 잦은 붕괴와 종언의 사도 시대</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-xs bg-slate-900/90 border border-slate-800 px-3 py-2 rounded-lg">
+                <span class="flex items-center gap-1.5 text-amber-400"><i class="fa-solid fa-gem"></i> 베르 자원 활성화</span>
+                <span class="text-slate-600">|</span>
+                <span class="text-slate-300">넥서스 네트워크: 정상</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-4">
+        <div class="max-w-7xl mx-auto flex overflow-x-auto no-scrollbar gap-2 py-3 text-sm font-medium">
+            <button onclick="switchTab('lore')" id="tab-lore" class="tab-btn active px-4 py-2 rounded-lg border border-transparent whitespace-nowrap transition flex items-center gap-2">
+                <i class="fa-solid fa-book"></i> 세계관 개요
+            </button>
+            <button onclick="switchTab('characters')" id="tab-characters" class="tab-btn px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2">
+                <i class="fa-solid fa-users"></i> 주요 인물 (<span id="char-count">24</span>)
+            </button>
+            <button onclick="switchTab('races')" id="tab-races" class="tab-btn px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2">
+                <i class="fa-solid fa-dna"></i> 종족 도감
+            </button>
+            <button onclick="switchTab('atlas')" id="tab-atlas" class="tab-btn px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2">
+                <i class="fa-solid fa-map-location-dot"></i> 대륙 지리
+            </button>
+            <button onclick="switchTab('ranks')" id="tab-ranks" class="tab-btn px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2">
+                <i class="fa-solid fa-skull"></i> 위험도/전투 등급
+            </button>
+            <button onclick="switchTab('economy')" id="tab-economy" class="tab-btn px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2">
+                <i class="fa-solid fa-coins"></i> 환전/베르 정산기
+            </button>
+            <button onclick="switchTab('card-gen')" id="tab-card-gen" class="tab-btn px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 whitespace-nowrap transition flex items-center gap-2">
+                <i class="fa-solid fa-id-card"></i> 모험가 카드 발급
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
+
+        <!-- 1. Lore Tab -->
+        <section id="content-lore" class="tab-content space-y-6">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <span class="px-3 py-1 bg-blue-900/50 text-blue-400 border border-blue-700/50 rounded-full text-xs font-bold uppercase tracking-widest">
+                        세계관 핵심 배경
+                    </span>
+                    <h2 class="text-3xl font-bold text-white">평화의 뒷편에 도사린 붕괴의 재앙</h2>
+                    <p class="text-slate-300 leading-relaxed">
+                        300년 전 대마신 '데이비스'가 봉인된 이후 루테빌라 대륙은 평화를 되찾았으나, 최근 10년간 원인 불명의 잦은 '붕괴' 현상으로 인해 수많은 남성이 목숨을 잃었습니다. 로어와 베르가 존재하는 이 중세풍 이능력 세계에서 모험가들은 던전과 붕괴에 맞서 대륙의 질서를 지키고 있습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Collapse Phenomena -->
+                <div class="bg-slate-900/60 border border-red-900/30 rounded-xl p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-red-400 flex items-center gap-2">
+                        <i class="fa-solid fa-biohazard"></i> 붕괴 (Collapse) 현상
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
+                        <li>살아있는 모든 존재를 안쪽으로 강하게 끌어당김.</li>
+                        <li>발생 시 재앙급 이상의 강력한 보스 몬스터가 출현.</li>
+                        <li><strong class="text-red-300">명확한 전조 증상이 전혀 없음</strong>.</li>
+                        <li>단 하나의 생명체만 빨아들여도 즉시 붕괴 소멸로 이어져 사전 대비 불가능.</li>
+                        <li>붕괴에 휘말린 생명체는 전원 사망 처리됨.</li>
+                    </ul>
+                </div>
+
+                <!-- Apostles of the End -->
+                <div class="bg-slate-900/60 border border-purple-900/30 rounded-xl p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-purple-400 flex items-center gap-2">
+                        <i class="fa-solid fa-eye-slash"></i> 적대 집단: 종언의 사도
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        평화로운 루테빌라 대륙 이면에 암약하는 악의 집단. 
+                        조직의 소속원 모두가 죽음에 대한 공포가 전혀 없으며, 붕괴 현상 및 몬스터 변이와 깊은 연관을 맺고 세계를 종말로 이끌려 합니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Guilds & Factions -->
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-guilded"></i> 대륙 주요 길드
+                </h3>
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="p-4 bg-slate-950 border border-slate-800 rounded-lg space-y-2">
+                        <h4 class="font-bold text-blue-300">칼리오스 (Callios)</h4>
+                        <p class="text-xs text-slate-400">아르카디아(동부) 제국 대표 길드. 막강한 지원과 다양한 의뢰 중계.</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 border border-slate-800 rounded-lg space-y-2">
+                        <h4 class="font-bold text-cyan-300">블루윈드 (Blue Wind)</h4>
+                        <p class="text-xs text-slate-400">카르디아(서부) 정보 길드. 대륙 전역의 소식과 붕괴 조짐 파악.</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 border border-slate-800 rounded-lg space-y-2">
+                        <h4 class="font-bold text-indigo-300">오브티아 (Obtia)</h4>
+                        <p class="text-xs text-slate-400">아스테리아(북부) 실력주의 길드. 혹독한 북방 환경 중심의 고전력 각성자 집결.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 2. Characters Tab -->
+        <section id="content-characters" class="tab-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900 border border-slate-800 p-4 rounded-xl">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-address-book text-blue-400"></i> 인물 도감 (총 24명)
+                    </h2>
+                    <p class="text-xs text-slate-400">16:9 와이드 비율의 이미지가 적용된 루테빌라 인물 프로필입니다.</p>
+                </div>
+            </div>
+
+            <div id="character-list-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <!-- Dynamically Inserted Characters -->
+            </div>
+        </section>
+
+        <!-- 3. Races Tab -->
+        <section id="content-races" class="tab-content hidden space-y-6">
+            <h2 class="text-2xl font-bold text-white mb-4">대륙 거주 종족</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
+                    <h3 class="text-lg font-bold text-amber-400">인간 (Human)</h3>
+                    <p class="text-sm text-slate-300">가장 높은 고점과 잠재력. 모든 종족과 교배 가능.</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
+                    <h3 class="text-lg font-bold text-orange-400">수인 (Beastkin)</h3>
+                    <p class="text-sm text-slate-300">강력한 신체 능력과 오감. 주기적 발정기.</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
+                    <h3 class="text-lg font-bold text-emerald-400">엘프 (Elf)</h3>
+                    <p class="text-sm text-slate-300">장수족, 느린 성장. 현재 남성 엘프 없음.</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
+                    <h3 class="text-lg font-bold text-stone-300">드워프 (Dwarf)</h3>
+                    <p class="text-sm text-slate-300">강한 힘과 탁월한 제작 및 손기술.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Geography Atlas Tab -->
+        <section id="content-atlas" class="tab-content hidden space-y-6">
+            <h2 class="text-2xl font-bold text-white mb-2">루테빌라 대륙 4대 지역</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <h3 class="text-xl font-bold text-amber-400">아르카디아 (동부)</h3>
+                    <p class="text-sm text-slate-300">아르카디아 제국, 철혈산맥, 검은 숲, 라그나</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <h3 class="text-xl font-bold text-emerald-400">엘드라 (남부)</h3>
+                    <p class="text-sm text-slate-300">엘드리아, 실바레아(세계수 트리탄스), 태고림</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <h3 class="text-xl font-bold text-cyan-400">카르디아 (서부)</h3>
+                    <p class="text-sm text-slate-300">벨카, 심연동굴, 카르멘, 바르베톨</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+                    <h3 class="text-xl font-bold text-blue-400">아스테리아 (북부)</h3>
+                    <p class="text-sm text-slate-300">화이트가르드, 빙결궁, 빙설지대, 벨로스</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Threat & Ranks Tab -->
+        <!-- 5. Threat & Ranks Tab -->
+        <section id="content-ranks" class="tab-content hidden space-y-8">
+            <!-- Threat Levels -->
+            <div>
+                <h2 class="text-2xl font-bold text-white mb-4">변이체 위험도 등급 (Threat Levels)</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800">
+                        <div class="text-green-400 font-bold mb-1">[안전급]</div>
+                        <div class="text-xs text-slate-300">실질적 피해가 거의 없는 수준.</div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800">
+                        <div class="text-lime-400 font-bold mb-1">[주의급]</div>
+                        <div class="text-xs text-slate-300">개인에게 경미한 부상 및 피해를 입히는 수준.</div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800">
+                        <div class="text-yellow-400 font-bold mb-1">[위험급]</div>
+                        <div class="text-xs text-slate-300">개인 또는 소규모 집단에 치명적 피해 가능.</div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800">
+                        <div class="text-orange-400 font-bold mb-1">[경계급]</div>
+                        <div class="text-xs text-slate-300">단일 건물 및 소규모 구역 파괴 가능. 원석 드롭.</div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-lg border border-red-900/50">
+                        <div class="text-red-400 font-bold mb-1">[재앙급]</div>
+                        <div class="text-xs text-slate-300">단일 도시 전역 파괴. 붕괴 현상에서만 출현.</div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-lg border border-purple-900/50">
+                        <div class="text-purple-400 font-bold mb-1">[천재급]</div>
+                        <div class="text-xs text-slate-300">국가 또는 대륙 전역 파멸적 피해 초래.</div>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-lg border border-pink-900/80">
+                        <div class="text-pink-500 font-bold mb-1">[종말급]</div>
+                        <div class="text-xs text-slate-300">지구 규모의 파괴. 과거 대마신 데이비스 유일 보유.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Combat Ranks -->
+            <div>
+                <h2 class="text-2xl font-bold text-white mb-4">전투 등급 (Combat Ranks)</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center p-3 bg-slate-900 rounded-lg border border-slate-800 gap-4">
+                        <span class="w-16 text-center font-black text-slate-500">F급</span>
+                        <div class="text-sm"><strong>일반인</strong>: 특수 전투 능력이 전무한 평범한 인간.</div>
+                    </div>
+                    <div class="flex items-center p-3 bg-slate-900 rounded-lg border border-slate-800 gap-4">
+                        <span class="w-16 text-center font-black text-emerald-400">E급</span>
+                        <div class="text-sm"><strong>초보 전투원</strong>: 기본 무장 숙련 및 기초 로어 활용. 모험가 등록 최소 조건.</div>
+                    </div>
+                    <div class="flex items-center p-3 bg-slate-900 rounded-lg border border-slate-800 gap-4">
+                        <span class="w-16 text-center font-black text-cyan-400">D급</span>
+                        <div class="text-sm"><strong>숙련 전투원</strong>: 하위 변이체 단독 사냥 가능.</div>
+                    </div>
+                    <div class="flex items-center p-3 bg-slate-900 rounded-lg border border-slate-800 gap-4">
+                        <span class="w-16 text-center font-black text-blue-400">C급</span>
+                        <div class="text-sm"><strong>상위 전투원</strong>: 중형 변이체 단독·연계 대응 가능. <em>모험가 평균 등급</em>.</div>
+                    </div>
+                    <div class="flex items-center p-3 bg-slate-900 rounded-lg border border-slate-800 gap-4">
+                        <span class="w-16 text-center font-black text-purple-400">B급</span>
+                        <div class="text-sm"><strong>도시급 전력</strong>: 소규모 부대 상대 가능 및 도시 단위 핵심 방위 전력.</div>
+                    </div>
+                    <div class="flex items-center p-3 bg-slate-900 rounded-lg border border-slate-800 gap-4">
+                        <span class="w-16 text-center font-black text-amber-400">A급</span>
+                        <div class="text-sm"><strong>국가급 전력</strong>: 대규모 전세를 좌우하는 최상위 각성자.</div>
+                    </div>
+                    <div class="flex items-center p-3 bg-slate-900 rounded-lg border border-red-900/50 gap-4">
+                        <span class="w-16 text-center font-black text-red-500">S급</span>
+                        <div class="text-sm"><strong>인간의 한계</strong>: 단독으로 도시 전체를 궤멸시키는 영역.</div>
+                    </div>
+                    <div class="flex items-center p-3 bg-gradient-to-r from-amber-950 to-slate-900 rounded-lg border border-amber-500/50 gap-4">
+                        <span class="w-16 text-center font-black text-amber-300">EX급</span>
+                        <div class="text-sm"><strong>수호자 (Guardian)</strong>: 단독으로 천재급 위협을 완벽히 저지하는 대륙 단 4명의 초월자.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Economy & Currency Converter -->
+        <section id="content-economy" class="tab-content hidden space-y-6">
+            <h2 class="text-2xl font-bold text-white mb-2">화폐 & 변이체 원석 정산기</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-4">
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">골드 (Gold)</label>
+                            <input type="number" id="input-gold" value="0" min="0" oninput="calculateCurrency()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">실버 (Silver)</label>
+                            <input type="number" id="input-silver" value="0" min="0" oninput="calculateCurrency()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">브론즈 (Bronze)</label>
+                            <input type="number" id="input-bronze" value="0" min="0" oninput="calculateCurrency()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-950 border border-slate-800 rounded-lg space-y-2">
+                        <div class="text-xs text-slate-400">환산 가치 (KRW):</div>
+                        <div id="output-krw" class="text-2xl font-black text-amber-400">0 원</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Adventurer Card Generator -->
+        <section id="content-card-gen" class="tab-content hidden space-y-6">
+            <h2 class="text-2xl font-bold text-white mb-2">모험가 / 각성자 신분증 발급기</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-4">
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <label class="block text-slate-400 mb-1">이름</label>
+                            <input type="text" id="gen-name" value="카밀라" oninput="updateCard()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">소속</label>
+                            <input type="text" id="gen-guild" value="칼리오스" oninput="updateCard()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">전투 등급</label>
+                            <input type="text" id="gen-rank" value="F급" oninput="updateCard()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">고유 로어</label>
+                            <input type="text" id="gen-lore" value="무능력자" oninput="updateCard()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">이미지 URL (16:9)</label>
+                            <input type="text" id="gen-img" value="https://itimg.kr/2700/LGD/A/0.webp" oninput="updateCard()" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-white">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center items-start">
+                    <div class="w-full max-w-md bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-blue-500/40 rounded-2xl p-6 shadow-2xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                            <span class="text-xs font-bold text-blue-400 uppercase">Lutevilla Guild Pass</span>
+                            <span id="preview-card-guild" class="text-xs bg-blue-950 text-blue-300 px-2 py-0.5 rounded">칼리오스</span>
+                        </div>
+                        <div class="flex flex-col gap-4 items-center">
+                            <!-- 16:9 Wide Frame for Preview Card -->
+                            <div class="w-full bg-slate-800 rounded-xl overflow-hidden border border-slate-700 flex-shrink-0 img-box-169">
+                                <img id="preview-card-img" src="https://itimg.kr/2700/LGD/A/0.webp" alt="Character" class="w-full h-full object-cover">
+                            </div>
+                            <div class="space-y-1 text-center w-full">
+                                <h4 id="preview-card-name" class="text-xl font-bold text-white">카밀라</h4>
+                                <div class="text-xs text-slate-400">등급: <span id="preview-card-rank" class="text-amber-400 font-bold">F급</span></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs space-y-1">
+                            <div class="text-slate-500">고유 로어</div>
+                            <div id="preview-card-lore" class="text-slate-200 font-medium">무능력자</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-600">
+        <p>© 300 Lutevilla Chronicle System. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const charactersData = [
+            {
+                code: "A", name: "카밀라", fullName: "카밀라 에버힐트", age: "27세", gender: "♀️",
+                outfit: "셔츠+검은 멜빵 드레스", accessory: "없음", guild: "칼리오스",
+                appearance: "푸른단발+은색 눈", body: "163cm,47kg", cup: "G컵", personality: "차분+상냥",
+                description: "칼리오스의 안내원. 각성자 테스트 및 전투등급 측정을 도와준다.",
+                tmi: "단 음식을 매우 좋아하며 쉴 때 마다 케이크와 차를 마신다.",
+                quotes: ["어서오세요.각성자 테스트를 도와드리겠습니다."],
+                rank: "F급", lore: "무능력자"
+            },
+            {
+                code: "B", name: "발리레아", fullName: "발리레아 드레밀", age: "34세", gender: "♀️",
+                outfit: "푸른색과 하얀색이 섞인 제복+바지", accessory: "유성", guild: "칼리오스",
+                appearance: "백금색 장발 포니테일,노란 눈", body: "174cm,53kg", cup: "H컵", personality: "상냥+예의",
+                description: "칼리오스의 길드 마스터. 누구에게나 존댓말을 사용하며 언제나 웃고 있다.",
+                tmi: "너무 완벽해서 다가오는 남자들이 없어 여전히 처녀로 지내고 노처녀라 놀리면 메테오 같은 꿀밤을 꽂는다.",
+                quotes: ["길드마스터 발리레아 입니다.칼리오스에 오신것을 환영해요."],
+                rank: "S급", lore: "메테오:천공에 메테오를 형성하여 떨군다."
+            },
+            {
+                code: "C", name: "베리", fullName: "베리 바벨", age: "24세", gender: "♀️",
+                outfit: "희색 튜닉과 노란색 치마,초록 망토", accessory: "없음", guild: "칼리오스",
+                appearance: "주황색 뿔모양머리 + 장발 + 파란눈", body: "156cm,43kg", cup: "B컵", personality: "활발+살짝 건방짐",
+                description: "칼리오스 소속 모험가로 E급에서 이제 막 D급이 되어 자신감이 과할 정도로 넘쳐나는 상태.",
+                tmi: "주량이 매우 세서 술배틀로 이기는 사람은 별로 없다.",
+                quotes: ["우와 신입이에요?되게 강해보이네.히히."],
+                rank: "D급", lore: "변환:필요한 상황에 맞게 무기 종류를 변환 시킬 수 있다."
+            },
+            {
+                code: "D", name: "블리자", fullName: "블리자 프레츠", age: "28세(외견)", gender: "♀️",
+                outfit: "동양풍 백의", accessory: "검선(劍仙)", guild: "무소속",
+                appearance: "백색단발+비녀+안광없는 검은눈", body: "170cm,55kg", cup: "E컵", personality: "차가움+단답+존댓말",
+                description: "현 아르카디아의 수호자. 대마신의 봉인을 도운 영웅.",
+                tmi: "술에 약하며 맥주 한잔 정도로 만취한다.",
+                quotes: ["네.맞습니다.아니오.모릅니다."],
+                rank: "수호자급", lore: "천단(天斷):베르조차 가르며.한번의 검격으로 하늘의 구름을 가르는 참격계 최상위 로어"
+            },
+            {
+                code: "E", name: "클로이", fullName: "클로이 레부르크", age: "29세", gender: "♀️",
+                outfit: "흰블라우스+갈색 롱 스커트+코르셋+앞치마+흰색 두건", accessory: "만물상", guild: "만물상점",
+                appearance: "갈색장발+검은 눈", body: "164cm,48kg", cup: "E컵", personality: "상냥+친절",
+                description: "아르젠 거리에 작은 만물상점 운영 중.",
+                tmi: "어지간한 포션과 물품,무기 등은 전부 있으며 생필품도 빠짐없이 다 파는 판타지 다이소.",
+                quotes: ["어서오세요~필요한거 있으시면 편하게 둘러보고 말씀해주세요^^"],
+                rank: "D급", lore: "감정:원석이나 아티펙트 등 베르가 존재하는 모든 물품에 대한 감정이 가능하다."
+            },
+            {
+                code: "F", name: "베르덴", fullName: "베르덴 클로이츠", age: "24세", gender: "♀️",
+                outfit: "검은색 후드+바디슈트+코르셋", accessory: "무음신보(자칭)", guild: "무소속",
+                appearance: "보라색 로우테일+회색눈", body: "163cm,43kg", cup: "D컵", personality: "능글",
+                description: "아르카디아의 좀도둑. 한 때 용병이었음.",
+                tmi: "할거 다하게 생겼지만 사실은 처녀.",
+                quotes: ["어머나~이게 무슨짓?제가 훔쳤다는 증거 있어요?후훗"],
+                rank: "D급", lore: "무음:발걸음에 대한 소릴 완전히 없앤다."
+            },
+            {
+                code: "G", name: "케이틴", fullName: "케이틴 메텔시아", age: "32세", gender: "♀️",
+                outfit: "하얀블라우스+검은 바지+노란조끼", accessory: "신궁", guild: "칼리오스",
+                appearance: "연한갈색단발+한쪽으로 넘긴 가르마+연청색 눈", body: "167cm,51kg", cup: "D~E컵", personality: "활발+털털",
+                description: "초창기부터 함께한 칼리오스의 부길드마스터.",
+                tmi: "발리레아와 매우 친하며 둘만 있을 땐 언니라고 부름.",
+                quotes: ["아!신입이야?어서와 칼리오스에~~"],
+                rank: "S급", lore: "미스틱 보우:베르로 정형된 활을 만들어내고 베르로 이루어진 화살 발사."
+            },
+            {
+                code: "H", name: "윈텔", fullName: "윈텔 라테벨라", age: "26세", gender: "♀️",
+                outfit: "흰색 튜닉+하늘 색 가디건+남색 치마", accessory: "풍인사(風刃士)", guild: "칼리오스",
+                appearance: "하늘색 장발 양갈래머리+보라색 눈", body: "160cm,44kg", cup: "C컵", personality: "밝고+다정+책임감",
+                description: "의뢰 수행과 높은 성공률로 신뢰받는 A급 각성자.",
+                tmi: "남을 놀리는 건 좋아하지만 역으로 당하면 얼굴이 빨개짐.",
+                quotes: ["어라~?왜 그렇게 진지해?"],
+                rank: "A급", lore: "윈드커터:주변 공기를 고속 압축해 칼날 형태의 기류를 만들어 발사."
+            },
+            {
+                code: "I", name: "엘레시안", fullName: "엘레시안 실바레인", age: "412세", gender: "♀️",
+                outfit: "백색 드레스+은빛 장식의 긴 망토", accessory: "월림의 여왕", guild: "실바레아",
+                appearance: "어두운 초록색 장발+에메랄드 눈+긴 귀", body: "174cm,56kg", cup: "H컵", personality: "우아+냉정+자애",
+                description: "실바레아를 다스리는 엘프의 여왕이자 현 4인의 수호자.",
+                tmi: "굉장한 허접보지.어지간한 손가락질에도 비명조차 못지르고 감.",
+                quotes: ["짐 앞에서 고개를 들거라. 너에게 죄가 있는 것은 아니니."],
+                rank: "수호자급", lore: "제어:주변의 자연 베르를 가져와 형태를 정형화하고 다룬다."
+            },
+            {
+                code: "J", name: "셀레네", fullName: "셀레네 에버린", age: "87세", gender: "♀️",
+                outfit: "연녹색 셔츠+갈색 조끼+흰색 바지", accessory: "숲의 눈", guild: "실바레아",
+                appearance: "긴 연녹색 머리+금빛 눈+긴 귀", body: "171cm,53kg", cup: "D컵", personality: "명랑+호기심+충성심",
+                description: "엘레시아의 직속 정찰병이자 숲의 경계를 감시하는 엘프.",
+                tmi: "여왕의 비밀스러운 사생활을 가장 많이 알고 있는 인물 중 하나.",
+                quotes: ["폐하, 또 혼자 몰래 나오셨죠?"],
+                rank: "B급", lore: "천청안(天聽眼):시야와 청각을 비정상적으로 확장하는 로어."
+            },
+            {
+                code: "K", name: "크루엘", fullName: "크루엘 라비스", age: "29세", gender: "여",
+                outfit: "검은색 란제리", accessory: "정욕의 마녀", guild: "백은가 창관",
+                appearance: "연보라머리+분홍색 눈+자궁문신", body: "164cm,50kg", cup: "G컵", personality: "느긋+퇴폐적",
+                description: "서큐버스의 피가 조금 섞여 있는 벨카의 인간 창부.",
+                tmi: "로어의 특성으로 그녀를 만족시키지 못하면 임신 시킬 수 없음.",
+                quotes: ["어머~멋진 손님이시네~어서와요.후훗."],
+                rank: "F급", lore: "착정:몸을 통해 정액을 흡수하면 노화가 느려지고 피부가 깨끗해짐."
+            },
+            {
+                code: "L", name: "레이카", fullName: "레이카 플렛", age: "28세", gender: "♀️",
+                outfit: "갑옷+치마+하얀망토", accessory: "별빛의 성(星)기사", guild: "아르카디아 제국",
+                appearance: "민트머리 장발+푸른 눈", body: "165cm,49kg", cup: "D컵", personality: "엄격+상냥",
+                description: "아르카디아 제국의 최연소 단장.",
+                tmi: "처녀이며 훈련이 없을 때 성인방에서 놀며 완전 다른 말투를 씀.",
+                quotes: ["그 따위로 할거면 차라리 그만두는게 어때?"],
+                rank: "S급", lore: "성력(星力):별빛의 힘을 검에 담아 휘둘러 상대방을 분쇄."
+            },
+            {
+                code: "M", name: "칼톤", fullName: "칼톤 막시무스", age: "85세", gender: "남",
+                outfit: "가죽 작업복", accessory: "명장", guild: "철혈산맥",
+                appearance: "흰 머리+검은눈", body: "148cm,76kg", cup: "해당없음", personality: "시원+고집",
+                description: "현 드워프 들의 수장이자 대장장이계의 명장.",
+                tmi: "손녀인 레이벨이 언젠가는 시집 갈 생각에 막막함.",
+                quotes: ["이딴 것도 무기라고 내밀다니!"],
+                rank: "D급", lore: "강견(鋼肩):강인한 어깨를 통해 쉼없이 내려칠 수 있는 능력."
+            },
+            {
+                code: "N", name: "레이벨", fullName: "레이벨 막시무스", age: "22세", gender: "♀️",
+                outfit: "흰 셔츠+갈색 가죽 앞치마+검은 작업바지", accessory: "명인", guild: "철혈산맥",
+                appearance: "짧은 적갈색 머리+갈색 눈", body: "162cm,48kg", cup: "F", personality: "소심+부끄럼쟁이",
+                description: "하프 드워프인 대장장이.",
+                tmi: "하프 드워프이기에 보통 드워프보다 키가 큼.",
+                quotes: ["아....그냥 할아버지가 시키는대로 한거에요..헤헤//"],
+                rank: "D급", lore: "철화(鐵花):금속의 구조를 감각적으로 파악하고 강도를 극한까지 끌어올림."
+            },
+            {
+                code: "O", name: "아르델", fullName: "아르델 로젠하임", age: "38세", gender: "♀️",
+                outfit: "백색 긴 드레스+금빛 장식+흰 장갑", accessory: "철면의 여왕", guild: "아르카디아 제국",
+                appearance: "짧은 금발+청색 눈", body: "170cm,53kg", cup: "E컵", personality: "온화+단호",
+                description: "아르카디아 제국을 다스리는 인간 여왕.",
+                tmi: "남편의 뒤를 이어 왕국을 이끌며 머리를 짧게 자름.",
+                quotes: ["왕관을 썼다고 모든 답을 알고 있는 것은 아니랍니다."],
+                rank: "C급", lore: "왕명(王命):선언한 명령을 들은 상대의 행동을 강하게 억제."
+            },
+            {
+                code: "P", name: "세실", fullName: "세실 에델하르트", age: "42세", gender: "♀️",
+                outfit: "푸른색 드레스+챙 넓은 모자", accessory: "천칭의 악마", guild: "에델하르트 공작가",
+                appearance: "분홍색 한쪽으로 땋은 머리+푸른 눈", body: "162cm,48kg", cup: "G컵", personality: "냉정+가족애",
+                description: "에델하르트 가문의 안주인.",
+                tmi: "딸을 위해서라면 무엇이든 할 수 있음.",
+                quotes: ["그게 저와 무슨 상관이죠?"],
+                rank: "C급", lore: "천칭:힘의 상하관계를 일정하게 맞춤."
+            },
+            {
+                code: "Q", name: "쥴리", fullName: "쥴리 에델하르트", age: "20세", gender: "♀️",
+                outfit: "하얀 블라우스+검은 코르셋+보라색 드레스 치마+하얀 베르모", accessory: "결정의 영애", guild: "에델하르트 공작가",
+                appearance: "분홍색 왕관 땋은머리+장발+푸른 눈", body: "165cm,51kg", cup: "F컵", personality: "천진+위태",
+                description: "에델하르트 가문의 장녀이자 외동딸. 차기 가주.",
+                tmi: "입만 다물고 표정을 바꾸면 어머니 세실과 판박이.",
+                quotes: ["우후후훗.그런 것도 못한다니 평민답군요!"],
+                rank: "B급", lore: "결정화(結晶化):크리스탈과 같은 결정 군집체를 만들어냄."
+            },
+            {
+                code: "R", name: "리웬", fullName: "리웬 페르센트", age: "36세", gender: "♀️",
+                outfit: "분홍색 셔츠+흰색 로브+갈색 바지", accessory: "지진의 여제", guild: "오브티아",
+                appearance: "아이보리색 단발+녹색 눈+눈 밑 눈물점", body: "162cm,41kg", cup: "A컵", personality: "낙천적+느긋",
+                description: "실력주의 길드 오브티아의 마스터.",
+                tmi: "엄청난 동안으로 나이보다 10살은 어려보임.",
+                quotes: ["아...실패했구나?괜차나~괜차나~"],
+                rank: "S급", lore: "폭진(爆震):강력한 진동을 생성해 지진에 가까운 충격파 발사."
+            },
+            {
+                code: "S", name: "카엘", fullName: "카엘 루체", age: "29세", gender: "♀️",
+                outfit: "검은 드레스+검은 머리띠+붉은 코르셋", accessory: "북부의 악녀", guild: "오브티아",
+                appearance: "붉은 장발 머리+회색 눈", body: "166cm,49kg", cup: "E컵", personality: "악녀+질서적",
+                description: "오브티아의 부길드마스터.",
+                tmi: "빈민가 출신인 자신을 거두어준 리웬에게는 정중함.",
+                quotes: ["크흐흐..또 병신같이 실패했구나♡"],
+                rank: "A급", lore: "가속:모든 무기체와 유기체에 대하여 가속을 더함."
+            },
+            {
+                code: "T", name: "루루", fullName: "루루 캔들라", age: "31세", gender: "♀️",
+                outfit: "흰색 셔츠 + 검은색 정장 자켓 + 청색 넥타이 + 검은 스커트+안경", accessory: "은서(銀書)", guild: "블루윈드",
+                appearance: "청은색 묶음 머리+청록색 눈", body: "160cm,42kg", cup: "C컵", personality: "탐욕+계산적",
+                description: "블루윈드의 길드마스터.",
+                tmi: "세상은 돈으로 할 수 없는 건 돈이 부족하기 때문이라고 믿음.",
+                quotes: ["무슨 필요한 정보라도 있나요?돈만 주면 다해줄게요~"],
+                rank: "S급", lore: "마인드 브레이크:3초간 눈을 마주한 대상에게 최면과 환각을 검."
+            },
+            {
+                code: "U", name: "메이릴", fullName: "메이릴 버니어", age: "300세+", gender: "♀️",
+                outfit: "가슴붕대+검은색 바지+붉은 로브", accessory: "심판의 화염", guild: "무소속",
+                appearance: "레몬색 장발+길쭉한 바보털+주황색 눈동자", body: "172cm,57kg", cup: "H컵", personality: "화끈+가식없음",
+                description: "카르디아 지역의 수호자.",
+                tmi: "돈과 술을 매우 좋아하고 노는 것을 좋아함.",
+                quotes: ["이봐~내가 좀 취하고 싶은데 술 좀 주면 안되나?"],
+                rank: "수호자급", lore: "금염(金炎):베르조차 태워버리는 황금빛 불꽃을 전개."
+            },
+            {
+                code: "V", name: "멜리파", fullName: "멜리파 유그넬론", age: "300세+", gender: "♀️",
+                outfit: "검은색 예복+베일 마스크+보라색 오비 벨트", accessory: "공허의 지배자", guild: "무소속",
+                appearance: "회색 머리 + 보라색눈", body: "172cm,57kg", cup: "D컵", personality: "상냥+기괴",
+                description: "아스테리아의 수호자.",
+                tmi: "동료들이 죽은 죄책감으로 묘한 뒤틀림이 생김.",
+                quotes: ["다치신 곳은 없으신가요? 어떻게 살아남으신 거신지..."],
+                rank: "수호자급", lore: "공허:베르로 이어진 모든 공격을 원천 차단하는 로어."
+            },
+            {
+                code: "W", name: "폭시야", fullName: "폭시야 에르시온", age: "26세", gender: "♀️",
+                outfit: "언더붑 상의 + 옆트임 스커트", accessory: "요망한 치유사", guild: "오브티아",
+                appearance: "흰색 장발+여우귀+여우꼬리+검은눈", body: "166cm,51kg", cup: "E컵", personality: "상냥+장난기",
+                description: "오브티아의 여우 수인 치유사.",
+                tmi: "팬티는 불편해서 안 입고 다님.",
+                quotes: ["음~열심히 하느냐 이렇게 엉망진창이 되어 버렸군요~"],
+                rank: "B급", lore: "리사이클:세포의 활성화와 줄기세포 조정으로 결손 부위 재생."
+            },
+            {
+                code: "X", name: "베스페라", fullName: "베스페라 피네이트", age: "39세", gender: "♀️",
+                outfit: "검은색 성녀 의상+검은색 후광 머리띠", accessory: "종언의 교주", guild: "종언의 사도",
+                appearance: "검은색+붉은색 안쪽 머리+히메컷", body: "169cm,51kg", cup: "G컵", personality: "무감정+오만",
+                description: "종언의 사도의 교주.",
+                tmi: "붕괴에 휘말려 연인을 잃은 후 인류 혐오에 빠짐.",
+                quotes: ["단 한사람이라도 구원받지 못한 세상에 영원한 평화는 없다."],
+                rank: "S+급", lore: "브레이크 핸드:베르로 정형된 수십~수백개의 손으로 닿는 것 파괴."
+            }
+        ];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+        }
+
+        function renderCharacters() {
+            const grid = document.getElementById('character-list-grid');
+            document.getElementById('char-count').innerText = charactersData.length;
+            grid.innerHTML = '';
+
+            charactersData.forEach(c => {
+                const imgPath = `https://itimg.kr/2700/LGD/${c.code}/0.webp`;
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4 hover:border-slate-700 transition flex flex-col justify-between";
+                card.innerHTML = `
+                    <div class="space-y-4">
+                        <!-- 16:9 Wide Image Box -->
+                        <div class="w-full bg-slate-950 rounded-lg overflow-hidden border border-slate-800 img-box-169">
+                            <img src="${imgPath}" alt="${c.fullName}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1280x720?text=16:9+Image'">
+                        </div>
+                        <div class="space-y-1.5 w-full">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">${c.fullName} (${c.name})</h3>
+                                    <div class="text-xs text-blue-400 font-medium">소속: ${c.guild}</div>
+                                </div>
+                                <span class="px-2 py-0.5 bg-slate-800 text-amber-400 font-bold text-xs rounded border border-slate-700">${c.rank}</span>
+                            </div>
+                            <div class="text-xs text-slate-400 space-y-0.5">
+                                <div><strong>나이/성별:</strong> ${c.age} / ${c.gender}</div>
+                                <div><strong>외모:</strong> ${c.appearance}</div>
+                                <div><strong>체형/컵:</strong> ${c.body} / ${c.cup}</div>
+                                <div><strong>복장:</strong> ${c.outfit}</div>
+                                <div><strong>성격:</strong> ${c.personality}</div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 border-t border-slate-800/80 pt-3 text-xs">
+                            <p class="text-slate-300 leading-relaxed">${c.description}</p>
+                            <div class="bg-slate-950 p-2.5 rounded border border-slate-800/60 text-slate-400">
+                                <strong class="text-amber-400/90">TMI:</strong> ${c.tmi}
+                            </div>
+                            <div class="space-y-1">
+                                ${c.quotes.map(q => `<div class="text-slate-400 italic">"${q}"</div>`).join('')}
+                            </div>
+                            <div class="text-xs text-indigo-300 font-medium pt-1">
+                                <strong>로어:</strong> ${c.lore}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function calculateCurrency() {
+            const gold = parseInt(document.getElementById('input-gold').value) || 0;
+            const silver = parseInt(document.getElementById('input-silver').value) || 0;
+            const bronze = parseInt(document.getElementById('input-bronze').value) || 0;
+            const totalKrw = (gold * 1000000) + (silver * 10000) + (bronze * 1000);
+            document.getElementById('output-krw').innerText = totalKrw.toLocaleString() + ' 원';
+        }
+
+        function updateCard() {
+            document.getElementById('preview-card-name').innerText = document.getElementById('gen-name').value;
+            document.getElementById('preview-card-guild').innerText = document.getElementById('gen-guild').value;
+            document.getElementById('preview-card-rank').innerText = document.getElementById('gen-rank').value;
+            document.getElementById('preview-card-lore').innerText = document.getElementById('gen-lore').value;
+            document.getElementById('preview-card-img').src = document.getElementById('gen-img').value;
+        }
+
+        window.onload = function() {
+            renderCharacters();
+            calculateCurrency();
+            updateCard();
+        };
+    </script>
+</body>
+</html>
